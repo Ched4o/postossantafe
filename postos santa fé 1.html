@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postos Santa Fé - Excelência em Combustíveis</title>
+    
+    <!-- Meta Tags SEO -->
+    <meta name="description" content="Postos Santa Fé - Excelência em combustíveis Shell no Delta do Parnaíba. Oferecemos combustível de qualidade e serviços diferenciados.">
+    <meta name="keywords" content="posto, combustível, santa fé, shell, delta do parnaíba, abastecimento">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://www.shell.com/favicon.ico" type="image/x-icon">
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Ícones Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Cores Shell */
+            --shell-red: #FF0000;
+            --shell-yellow: #FFD700;
+            --shell-dark-red: #CC0000;
+            --shell-light-yellow: #FFF5CC;
+            
+            /* Cores para tema claro */
+            --light-bg: #ffffff;
+            --light-text: #333333;
+            --light-card: #f8f8f8;
+            --light-border: #e0e0e0;
+            
+            /* Cores para tema escuro */
+            --dark-bg: #121212;
+            --dark-text: #f0f0f0;
+            --dark-card: #1e1e1e;
+            --dark-border: #333333;
+            
+            /* Cores dinâmicas (mudam com o tema) */
+            --background: var(--light-bg);
+            --text-color: var(--light-text);
+            --card-bg: var(--light-card);
+            --border-color: var(--light-border);
+            
+            --section-padding: 6rem 2rem;
+            --transition: all 0.3s ease;
+        }
+
+        /* Tema escuro */
+        [data-theme="dark"] {
+            --background: var(--dark-bg);
+            --text-color: var(--dark-text);
+            --card-bg: var(--dark-card);
+            --border-color: var(--dark-border);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] header {
+            background-color: rgba(18, 18, 18, 0.95);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        header.scrolled {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] header.scrolled {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--shell-red);
+            margin-left: 0.5rem;
+        }
+
+        .logo-icon {
+            color: var(--shell-yellow);
+            margin-right: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            position: relative;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--shell-red);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--shell-red);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
+            z-index: 1;
+        }
+
+        [data-theme="dark"] .hero::before {
+            background: linear-gradient(to right, rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.6));
+        }
+
+        .youtube-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .youtube-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            min-width: 177.77vh;
+            height: 100vh;
+            min-height: 56.25vw;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            padding-top: 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            color: var(--shell-red);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--shell-red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--shell-dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--shell-red);
+            color: var(--shell-red);
+            background-color: transparent;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--shell-red);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+
+        /* Seções */
+        section {
+            padding: var(--section-padding);
+            position: relative;
+            background-color: var(--background);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            color: var(--shell-red);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--shell-yellow);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        /* Sobre Nós */
+        .about {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .about-img {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--shell-red);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .feature-icon {
+            color: var(--shell-yellow);
+            font-size: 1.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .feature-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        /* Nossas Unidades */
+        .units {
+            background-color: var(--background);
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .unit-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .unit-card {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .unit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .unit-card:hover {
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .unit-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .unit-content {
+            padding: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .badge-primary {
+            background-color: rgba(255, 0, 0, 0.2);
+            color: var(--shell-red);
+        }
+
+        .unit-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .unit-meta i {
+            margin-right: 0.5rem;
+            color: var(--shell-red);
+        }
+
+        .unit-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.7rem;
+            background-color: #25D366;
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-btn i {
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--shell-red);
+            padding: 3rem 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-logo span {
+            color: var(--shell-yellow);
+        }
+
+        .footer-logo .logo-icon {
+            color: var(--shell-yellow);
+            margin-right: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--shell-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--shell-yellow);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 8rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-img {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    <div class="header-container">
+        <a href="#home" class="logo">
+            <i class="fas fa-gas-pump logo-icon"></i>
+            SANTA <span>FÉ</span>
+        </a>
+        <div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu mobile">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav id="mainNav">
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#unidades">Unidades</a></li>
+                <li><a href="#shell-select">Shell Select</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="youtube-background">
+        <iframe 
+            src="https://www.youtube.com/embed/F0aGHrejx9A?autoplay=1&mute=1&loop=1&playlist=F0aGHrejx9A&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&start=34"
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    <div class="hero-content">
+        <h1>Excelência em abastecimento</h1>
+        <p>Nosso compromisso é oferecer combustível de qualidade e serviços diferenciados em todas as nossas unidades no Delta do Parnaíba.</p>
+        <div>
+            <a href="#unidades" class="btn btn-primary">
+                <i class="fas fa-map-marker-alt"></i> Nossas Unidades
+            </a>
+            <a href="#shell-select" class="btn btn-outline">
+                <i class="fas fa-store"></i> Shell Select
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Sobre Nós -->
+<section class="about" id="sobre">
+    <div class="section-title">
+        <h2>Sobre Nós</h2>
+        <p>Conheça a rede que está revolucionando o abastecimento na região</p>
+    </div>
+    <div class="about-container">
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Posto Santa Fé - Frente da loja">
+        </div>
+        <div class="about-content">
+            <h3>Sua Melhor Escolha para Abastecer</h3>
+            <p>Os Postos Santa Fé são referência em qualidade e atendimento no Delta do Parnaíba. Com mais de 20 anos de atuação, oferecemos os melhores combustíveis Shell e serviços para você e seu veículo.</p>
+            <p>Nossa missão é proporcionar uma experiência de abastecimento diferenciada, com produtos de qualidade, atendimento personalizado e instalações modernas.</p>
+            <div class="about-features">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-gas-pump"></i></div>
+                    <div class="feature-text">
+                        <h4>Combustível Premium</h4>
+                        <p>Qualidade Shell testada e aprovada</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <div class="feature-text">
+                        <h4>Atendimento 24h</h4>
+                        <p>Sempre à sua disposição</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-award"></i></div>
+                    <div class="feature-text">
+                        <h4>Certificação Shell</h4>
+                        <p>Padrões internacionais</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <div class="feature-text">
+                        <h4>Equipe Treinada</h4>
+                        <p>Profissionais qualificados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nossas Unidades -->
+<section class="units" id="unidades">
+    <div class="section-title">
+        <h2>Nossas Unidades</h2>
+        <p>Encontre o posto Santa Fé mais próximo de você</p>
+    </div>
+    <div class="units-grid">
+        <!-- Unidade 1 -->
+        <div class="unit-card">
+            <img src="https://images.unsplash.com/photo-1600172455199-6a2a713b76d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="unit-img" alt="Posto Santa Fé Parnaíba - Vista externa">
+            <div class="unit-content">
+                <span class="badge badge-primary">Shell Select</span>
+                <h3>Santa Fé Parnaíba</h3>
+                <div class="unit-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Av. São Sebastião, 1234 - Centro</p>
+                </div>
+                <p>Nossa unidade flagship, com todos os serviços e conveniência Shell Select 24 horas.</p>
+                <a href="https://wa.me/5586999999999" class="whatsapp-btn" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <!-- Unidade 2 -->
+        <div class="unit-card">
+            <img src="https://images.unsplash.com/photo-1600172455199-6a2a713b76d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="unit-img" alt="Posto Santa Fé Luís Correia - Vista externa">
+            <div class="unit-content">
+                <span class="badge badge-primary">Shell Select</span>
+                <h3>Santa Fé Luís Correia</h3>
+                <div class="unit-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Av. Beira Mar, 456 - Litoral</p>
+                </div>
+                <p>Localizada na orla, perfeita para quem está indo ou voltando das praias.</p>
+                <a href="https://wa.me/5586999999998" class="whatsapp-btn" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <!-- Unidade 3 -->
+        <div class="unit-card">
+            <img src="https://images.unsplash.com/photo-1600172455199-6a2a713b76d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="unit-img" alt="Posto Santa Fé Ilha Grande - Vista externa">
+            <div class="unit-content">
+                <span class="badge badge-primary">Shell Select</span>
+                <h3>Santa Fé Ilha Grande</h3>
+                <div class="unit-meta">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Rua do Porto, 789 - Delta</p>
+                </div>
+                <p>Unidade estratégica para quem navega pelo Delta, com Shell Select completo.</p>
+                <a href="https://wa.me/5586999999997" class="whatsapp-btn" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-logo">
+        <i class="fas fa-gas-pump logo-icon"></i>
+        SANTA <span>FÉ</span>
+    </div>
+    <div class="footer-links">
+        <a href="#home">Início</a>
+        <a href="#unidades">Unidades</a>
+        <a href="#shell-select">Shell Select</a>
+        <a href="#contato">Contato</a>
+        <a href="#sobre">Sobre Nós</a>
+    </div>
+    <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="copyright">&copy; 2025 Postos Santa Fé. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    // Menu Mobile Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
+        mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    // Close menu on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100 && mainNav.classList.contains('active')) {
+            mainNav.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Fechar menu mobile se estiver aberto
+            if (mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+            
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Verificar preferência do sistema ou tema salvo
+    const currentTheme = localStorage.getItem('theme') || 
+                        (prefersDarkScheme.matches ? 'dark' : 'light');
+    
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+    
+    // Alternar tema
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    });
+</script>
+
+</body>
+</html>
